@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row">
+        <div *ngIf="sidebarStatus" class="col bg-dark d-flex flex-column" style="height:91.5vh">
+            <a routerLink="/dashboard" class="text-decoration-none fs-5 fw-bold text-light mt-5">Home</a>
+            <a routerLink="/users" class="text-decoration-none fs-5 fw-bold text-light mt-2">Users</a>
+            <button class="btn text-light mt-auto mb-4 fw-bold" (click)="logout()">Logout<i
+                    class="fa-solid fa-right-from-bracket ms-2"></i></button>
+        </div>
+        <div [ngClass]="sidebarStatus?'col-11':'col-12'">
+            <div class="row mt-2">
+                <div class="col-8">
+                    <div class="banner d-flex align-items-center border rounded shadow"
+                        style="background-image: url('https://t3.ftcdn.net/jpg/01/09/81/02/360_F_109810224_B2Jmt5FCLjcySrE7K1VwgOnIxPQ6XHQZ.jpg'); height: 180px;">
+                        <h1 class="ps-4"><i class="fa-solid fa-bars me-2" style="cursor:pointer;"
+                                (click)="menuBtnClicked()"></i> Welcome {{adminName}}
+                        </h1>
+                    </div>
+                    <div class="row mt-5 container-fluid">
+                        <div class="col-5"><app-calendar></app-calendar></div>
+                        <div class="col-2"></div>
+                        <div class="col-5 border rounded shadow"><app-chart></app-chart></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="edit-admin border rounded shadow" style="height: 400px;">
+                        <app-update-admin (onAdminChange)="onAdminChange($event)"></app-update-admin>
+                    </div>
+                    <div class="total-users border rounded shadow mt-4 d-flex justify-content-center align-items-center "
+                        style="background-image: url('https://t3.ftcdn.net/jpg/01/09/81/02/360_F_109810224_B2Jmt5FCLjcySrE7K1VwgOnIxPQ6XHQZ.jpg'); height: 200px;">
+                        <h2> Total Users: {{empCount}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

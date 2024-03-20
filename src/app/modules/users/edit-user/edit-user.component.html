@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark d-flex flex-column" style="height:91.5vh">
+            <a routerLink="/dashboard" class="text-decoration-none fs-5 fw-bold text-light mt-5">Home</a>
+            <a routerLink="/users" class="text-decoration-none fs-5 fw-bold text-light mt-2">Users</a>
+        </div>
+        <div class="col-11">
+            <div class="w-100 d-flex justify-content-center align-items-center flex-column">
+                <h1 class="mt-5">Edit User Details</h1>
+                <form action="" class="border rounded shadow mt-5 p-5" style="width: 35%;" #editUserForm="ngForm">
+
+                    <input type="text" class="form-control mt-3" placeholder="Enter Employee ID" name="empId"
+                        [(ngModel)]="user.empId" required #empId="ngModel">
+                    <div *ngIf="empId.invalid && empId.touched" class="text-danger">*Invalid Id</div>
+
+                    <input type="text" class="form-control mt-3" placeholder="Enter Username" name="empUsername"
+                        [(ngModel)]="user.name" required #empUsername="ngModel">
+                    <div *ngIf="empUsername.invalid && empUsername.touched" class="text-danger">*Invalid Username</div>
+
+                    <input type="email" class="form-control mt-3" placeholder="Enter Email Address" name="empEmail"
+                        [(ngModel)]="user.email" required email #empEmail="ngModel">
+                    <div *ngIf="empEmail.invalid && empEmail.touched" class="text-danger">*Invalid Email</div>
+
+                    <label for="statusList" class="me-2 mt-3">Status:</label>
+                    <select name="empStatus" id="statusList" [(ngModel)]="user.status" #empStatus="ngModel" required>
+                        <option value="" selected hidden>Select</option>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <div *ngIf="empStatus.invalid && empStatus.touched" class="text-danger">*Invalid Status</div>
+                    <div class="d-flex justify-content-around mt-3">
+                        <button class="btn btn-warning fw-bold" [disabled]="editUserForm.invalid"
+                            (click)="update(user.id)">Update</button>
+                        <button class="btn btn-danger fw-bold" (click)="cancel(user.id)">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark d-flex flex-column" style="height:91.5vh">
+            <a routerLink="/dashboard" class="text-decoration-none fs-5 fw-bold text-light mt-5">Home</a>
+            <a routerLink="/users" class="text-decoration-none fs-5 fw-bold text-light mt-2">Users</a>
+        </div>
+        <div class="col-11">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>Users List</h1>
+                <a routerLink="/users/add" class="btn btn-success fw-bold me-3 mt-5">Add <i
+                        class="fa-solid fa-user-plus"></i></a>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <div class="d-flex w-50 align-items-center">
+                    <label for="search">Search: </label>
+                    <input type="text" class="ms-2 form-control" style="width: 50%;" placeholder="Search By Username"
+                        [(ngModel)]="searchKey">
+                    <button class="btn btn-secondary dropdown-toggle ms-4" type="button"
+                        data-bs-toggle="dropdown">Search</button>
+                    <ul class="dropdown-menu">
+                        <li><button class="dropdown-item" (click)="sortById()">By Id</button></li>
+                        <li><button class="dropdown-item" (click)="sortByName()">By Username</button></li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary me-3 fw-bold" (click)="generatePDF()">Export</button>
+            </div>
+            <table class="table mt-5 border shadow">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username </th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of allUsers | search : searchKey | paginate: { itemsPerPage: 6, currentPage: page }"
+                        [hidden]="!user.empId">
+                        <td>{{user.empId}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td><span
+                                [ngClass]="user.status=='1'?'btn btn-success':'btn btn-warning'">{{user.status=='1'?'Active':'Inactive'}}</span>
+                        </td>
+                        <td>
+                            <a routerLink="/users/edit/{{user.id}}" class="btn"><i
+                                    class="fa-solid fa-pen text-primary"></i></a>
+                            <button class="btn" (click)="deleteUser(user.id)"><i
+                                    class="fa-solid fa-trash text-danger"></i></button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="(allUsers | search : searchKey).length==0">
+                        <th class="text-danger">User Not Found</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center mt-5"><pagination-controls (pageChange)="page = $event"></pagination-controls></div>
+        </div>
+    </div>
+</div>

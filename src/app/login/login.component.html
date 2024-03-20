@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+    <div class="w-50 border rounded shadow p-5">
+        <div class="row align-items-center">
+            <div class="col-6 border rounded p-3 shadow">
+                <h1 class="text-center">Login Form</h1>
+                <div class="mt-4">
+                    <form action="" #loginForm="ngForm" (ngSubmit)="login()">
+                        <input type="email" class="form-control mb-3" placeholder="Email" required [(ngModel)]="email"
+                            email name="email" #userEmailInput="ngModel">
+                        <div *ngIf="userEmailInput.invalid && userEmailInput.touched" class="text-danger mb-3">*Invalid
+                            Email</div>
+                        <input type="password" class="form-control mb-4" placeholder="Password" required
+                            pattern="[a-zA-Z0-9]+" minlength="3" [(ngModel)]="password" name="password"
+                            #userPasswordInput="ngModel">
+                        <div *ngIf="userPasswordInput.invalid && userPasswordInput.touched" class="text-danger mb-3">
+                            *Invalid
+                            Password</div>
+                        <div class="text-center"><input type="submit" class="btn btn-success w-50" value="Login"
+                                [disabled]="loginForm.invalid && loginForm.touched"></div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-6">
+                <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?size=338&ext=jpg&ga=GA1.1.735520172.1710288000&semt=sph"
+                    alt="">
+            </div>
+        </div>
+    </div>
+</div>
